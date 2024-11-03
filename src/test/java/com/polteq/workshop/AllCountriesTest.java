@@ -1,6 +1,7 @@
 package com.polteq.workshop;
 
 import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class AllCountriesTest extends CountriesOfTheWorldScenario {
      * 3. Assert: Verify that all entered countries are marked as correct.
      */
     @Test
+    @DisplayName("Test all Countries of the World")
     public void allCountriesTest() {
         // +-----------------------------------------------------------------------------------------------------------+
         // | Arrange
