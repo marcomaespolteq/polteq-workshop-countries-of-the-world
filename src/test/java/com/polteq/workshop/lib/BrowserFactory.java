@@ -17,7 +17,7 @@ public class BrowserFactory {
     /**
      * Creates a browser instance using the specified Playwright instance and browser name.
      *
-     * @param playwright the Playwright instance used to create the browser
+     * @param playwright  the Playwright instance used to create the browser
      * @param browserName the name of the browser to create (Chromium, Firefox, WebKit)
      * @return the created Browser instance
      */
