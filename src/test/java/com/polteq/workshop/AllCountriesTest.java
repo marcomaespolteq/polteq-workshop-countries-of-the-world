@@ -42,24 +42,24 @@ public class AllCountriesTest {
         // +-----------------------------------------------------------------------------------------------------------+
 
         // Click on the cookie consent button
-        page.locator("[aria-label='Consent']").click();
+        page.locator("<Your selector here>").click();
         // Click on the start button to start the game
-        page.locator("#start-button").click();
+        page.locator("<Your selector here>").click();
 
         // Retrieve all countries
-        List<String> countries = page.locator(".gxh").all().stream()
+        List<String> countries = page.locator("<Your selector here>").all().stream()
                 .map(locator -> locator.textContent().trim())
                 .toList();
 
         // For every country fill in the country in the answer box
         for (String country : countries) {
-            page.locator("#txt-answer-box").fill(country);
+            page.locator("<Your selector here>").fill(country);
         }
 
         // Close the first popup
-        page.locator("[aria-label='Close']").click();
+        page.locator("<Your selector here>").click();
         // Close the second popup
-        page.locator("[aria-label='Close']").click();
+        page.locator("<Your selector here>").click();
 
         // +-----------------------------------------------------------------------------------------------------------+
         // | Assert
@@ -68,7 +68,7 @@ public class AllCountriesTest {
         // Check if all countries are marked as correct in the tables
         SoftAssertions softAssertions = new SoftAssertions();
         for (String country : countries) {
-            Locator elCountry = page.locator("//td[contains(@class, 'correct') and .= '%s']".formatted(country));
+            Locator elCountry = page.locator("<Your selector here>".formatted(country));
             softAssertions.assertThat(elCountry.isVisible())
                     .as("Country " + country + "should be in the list")
                     .isTrue();
