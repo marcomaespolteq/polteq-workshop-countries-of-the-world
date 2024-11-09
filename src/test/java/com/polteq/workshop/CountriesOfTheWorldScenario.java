@@ -18,34 +18,22 @@ public class CountriesOfTheWorldScenario {
 
     @BeforeAll
     public void beforeAllTests() {
-        playwright = Playwright.create();
-        browser = BrowserFactory.createBrowser(playwright, BrowserName.FIREFOX);
+        // Write your code here
     }
 
     @BeforeEach
     public void setUp() {
-        context = browser.newContext();
-        context.tracing().start(new Tracing.StartOptions()
-                .setScreenshots(true)
-                .setSnapshots(true)
-                .setSources(true));
-        page = context.newPage();
-        page.setViewportSize(1920, 1080);
-        quizPage = new QuizPage(page);
+        // Write your code here
+        // quizPage = new QuizPage(page); // <-- Uncomment when you have written the correct code
     }
 
     @AfterEach
     public void tearDown(TestInfo testInfo) {
-        page.close();
-        String currentTestName = testInfo.getDisplayName();
-        context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("target/traces/" + currentTestName + ".zip")));
-        context.close();
+        // Write your code here
     }
 
     @AfterAll
     public void afterAllTests() {
-        browser.close();
-        playwright.close();
+        // Write your code here
     }
 }

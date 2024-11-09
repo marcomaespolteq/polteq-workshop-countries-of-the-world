@@ -11,11 +11,11 @@ import java.util.Objects;
  * This class provides methods to interact with various elements on the quiz page.
  */
 public class QuizPage extends BasePage {
-    private final Locator cookieConsent = page.locator("[aria-label='Consent']");
-    private final Locator startButton = page.locator("#start-button");
-    private final Locator countries = page.locator(".gxh");
-    private final Locator countryInput = page.locator("#txt-answer-box");
-    private final Locator modalClose = page.locator("[aria-label='Close']");
+    private final Locator cookieConsent = page.locator("");
+    private final Locator startButton = page.locator("");
+    private final Locator countries = page.locator("");
+    private final Locator countryInput = page.locator("");
+    private final Locator modalClose = page.locator("");
 
     /**
      * Constructs a new instance of the QuizPage class.
@@ -39,14 +39,12 @@ public class QuizPage extends BasePage {
      * accept the usage of cookies, enabling further interactions with the website.
      */
     public void acceptCookieConsent() {
-        cookieConsent.click();
     }
 
     /**
      * Initiates the quiz by simulating a click on the start button.
      */
     public void startQuiz() {
-        startButton.click();
     }
 
     /**
@@ -55,7 +53,6 @@ public class QuizPage extends BasePage {
      * @param country the name of the country to be entered into the input box.
      */
     public void fillInCountry(String country) {
-        countryInput.fill(country);
     }
 
     /**
@@ -64,9 +61,7 @@ public class QuizPage extends BasePage {
      * @return a list of country names as strings, with each name trimmed of leading and trailing whitespace
      */
     public List<String> getCountryList() {
-        return countries.all().stream()
-                .map(locator -> locator.textContent().trim())
-                .toList();
+        return null; // <-- Change this to the real return value
     }
 
     /**
@@ -76,18 +71,12 @@ public class QuizPage extends BasePage {
      * @return true if the country is marked as correct, false otherwise
      */
     public boolean isCountryCorrect(String country) {
-        try {
-            Locator elCountry = page.locator("//td[contains(@class, 'correct') and .= '%s']".formatted(country));
-            return !Objects.isNull(elCountry);
-        } catch (Exception e) {
-            return false;
-        }
+        return false; // <-- Change this to the real return value
     }
 
     /**
      * Closes the open modal by clicking on the close button.
      */
     public void closeModal() {
-        modalClose.click();
     }
 }

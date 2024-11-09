@@ -1,5 +1,6 @@
 package com.polteq.workshop;
 
+import com.microsoft.playwright.*;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,30 +29,38 @@ public class AllCountriesTest extends CountriesOfTheWorldScenario {
         // | Arrange
         // +-----------------------------------------------------------------------------------------------------------+
 
-        // Navigate to the quiz website
-        quizPage.navigateToQuizPage();
+        // Setup Playwright
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        // Initialize browser
+        page.setViewportSize(1920, 1080);
+        page.navigate("https://www.jetpunk.com/quizzes/how-many-countries-can-you-name");
 
         // +-----------------------------------------------------------------------------------------------------------+
         // | Act
         // +-----------------------------------------------------------------------------------------------------------+
 
         // Click on the cookie consent button
-        quizPage.acceptCookieConsent();
+        page.locator("[aria-label='Consent']").click();
         // Click on the start button to start the game
-        quizPage.startQuiz();
+        page.locator("#start-button").click();
 
         // Retrieve all countries
-        List<String> countries = quizPage.getCountryList();
+        List<String> countries = page.locator(".gxh").all().stream()
+                .map(locator -> locator.textContent().trim())
+                .toList();
 
         // For every country fill in the country in the answer box
         for (String country : countries) {
-            quizPage.fillInCountry(country);
+            page.locator("#txt-answer-box").fill(country);
         }
 
         // Close the first popup
-        quizPage.closeModal();
+        page.locator("[aria-label='Close']").click();
         // Close the second popup
-        quizPage.closeModal();
+        page.locator("[aria-label='Close']").click();
 
         // +-----------------------------------------------------------------------------------------------------------+
         // | Assert
@@ -60,10 +69,20 @@ public class AllCountriesTest extends CountriesOfTheWorldScenario {
         // Check if all countries are marked as correct in the tables
         SoftAssertions softAssertions = new SoftAssertions();
         for (String country : countries) {
-            softAssertions.assertThat(quizPage.isCountryCorrect(country))
+            Locator elCountry = page.locator("//td[contains(@class, 'correct') and .= '%s']".formatted(country));
+            softAssertions.assertThat(elCountry.isVisible())
                     .as("Country " + country + "should be in the list")
                     .isTrue();
         }
         softAssertions.assertAll();
+
+        // +-----------------------------------------------------------------------------------------------------------+
+        // | Cleanup
+        // +-----------------------------------------------------------------------------------------------------------+
+
+        // Cleanup Playwright
+        page.close();
+        browser.close();
+        playwright.close();
     }
 }
