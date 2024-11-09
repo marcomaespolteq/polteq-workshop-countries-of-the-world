@@ -6,7 +6,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.SoftAssertions;
 
 /**
  * This class defines the step definitions for interacting with the "Countries of the World Quiz"
@@ -35,8 +34,7 @@ public class CountriesOfTheWorldSteps extends CucumberScenario {
      */
     @Given("I am on the Countries of the World Quiz website")
     public void iAmOnTheCountriesOfTheWorldQuizWebsite() {
-        quizPage.navigateToQuizPage();
-        quizPage.acceptCookieConsent();
+        // Place your code here
     }
 
     /**
@@ -49,9 +47,7 @@ public class CountriesOfTheWorldSteps extends CucumberScenario {
      */
     @When("I start the quiz")
     public void iStartTheQuiz() {
-        // Prepare the data, so we can achieve the best possible time in the quiz
-        scenarioContext.countries = quizPage.getCountryList();
-        quizPage.startQuiz();
+        // Place your code here
     }
 
     /**
@@ -61,7 +57,7 @@ public class CountriesOfTheWorldSteps extends CucumberScenario {
      */
     @And("I fill in all the countries of the world")
     public void iFillInAllTheCountriesOfTheWorld() {
-        scenarioContext.countries.forEach(quizPage::fillInCountry);
+        // Place your code here
     }
 
     /**
@@ -72,12 +68,6 @@ public class CountriesOfTheWorldSteps extends CucumberScenario {
      */
     @Then("all the countries should appear in the list as correct")
     public void allTheCountriesShouldAppearInTheListAsCorrect() {
-        SoftAssertions softAssertions = new SoftAssertions();
-        for (String country : scenarioContext.countries) {
-            softAssertions.assertThat(quizPage.isCountryCorrect(country))
-                    .as("Country " + country + "should be in the list")
-                    .isTrue();
-        }
-        softAssertions.assertAll();
+        // Place your code here
     }
 }
