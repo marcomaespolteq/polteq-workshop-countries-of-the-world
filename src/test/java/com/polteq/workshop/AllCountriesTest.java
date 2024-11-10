@@ -43,13 +43,14 @@ public class AllCountriesTest {
 
         // Click on the cookie consent button
         page.locator("[aria-label='Consent']").click();
-        // Click on the start button to start the game
-        page.locator("#start-button").click();
 
         // Retrieve all countries
         List<String> countries = page.locator(".gxh").all().stream()
                 .map(locator -> locator.textContent().trim())
                 .toList();
+
+        // Click on the start button to start the game
+        page.locator("#start-button").click();
 
         // For every country fill in the country in the answer box
         for (String country : countries) {
