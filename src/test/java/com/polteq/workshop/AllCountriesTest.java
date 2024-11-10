@@ -37,11 +37,12 @@ public class AllCountriesTest extends CountriesOfTheWorldScenario {
 
         // Click on the cookie consent button
         quizPage.acceptCookieConsent();
-        // Click on the start button to start the game
-        quizPage.startQuiz();
 
         // Retrieve all countries
         List<String> countries = quizPage.getCountryList();
+
+        // Click on the start button to start the game
+        quizPage.startQuiz();
 
         // For every country fill in the country in the answer box
         for (String country : countries) {

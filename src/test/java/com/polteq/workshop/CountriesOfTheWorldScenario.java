@@ -25,10 +25,10 @@ public class CountriesOfTheWorldScenario {
     @BeforeEach
     public void setUp() {
         context = browser.newContext();
-        context.tracing().start(new Tracing.StartOptions()
-                .setScreenshots(true)
-                .setSnapshots(true)
-                .setSources(true));
+//        context.tracing().start(new Tracing.StartOptions()
+//                .setScreenshots(true)
+//                .setSnapshots(true)
+//                .setSources(true));
         page = context.newPage();
         page.setViewportSize(1920, 1080);
         quizPage = new QuizPage(page);
@@ -37,9 +37,9 @@ public class CountriesOfTheWorldScenario {
     @AfterEach
     public void tearDown(TestInfo testInfo) {
         page.close();
-        String currentTestName = testInfo.getDisplayName();
-        context.tracing().stop(new Tracing.StopOptions()
-                .setPath(Paths.get("target/traces/" + currentTestName + ".zip")));
+//        String currentTestName = testInfo.getDisplayName();
+//        context.tracing().stop(new Tracing.StopOptions()
+//                .setPath(Paths.get("target/traces/" + currentTestName + ".zip")));
         context.close();
     }
 
